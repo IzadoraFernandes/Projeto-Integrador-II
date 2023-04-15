@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-def cadastrar(request):
-    return HttpResponse('Pandora')
+def home(request):
+    if request.session.get('usuario'): 
+        
+        return HttpResponse('Pandora')
+    else:
+        return redirect('/auth/login/?status=2')
