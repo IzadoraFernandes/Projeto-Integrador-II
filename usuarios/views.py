@@ -7,7 +7,7 @@ from hashlib import sha256
 def login(request):
     status = request.GET.get('status')
     return render(request, 'login.html', {'status':status})
-
+    
 def cadastro(request):
     status = request.GET.get('status')
     return render(request, 'cadastro.html', {'status': status})
@@ -55,3 +55,4 @@ def valida_login(request):
 def sair(request):
     request.session.flush()
     return redirect('/auth/login/')
+
