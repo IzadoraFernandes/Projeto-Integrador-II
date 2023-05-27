@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load filtros %}
 
 {% block 'conteudo' %}
 <div class="container">
     <br>
+
+    <a href="{%url 'sair' %}" class="btn btn-danger"> Sair </a>
+
     <form action="" method="POST">
       {% csrf_token %}
 
@@ -55,6 +59,7 @@
 
   <input type="submit" class="btn btn-success btn-lg" value="Salvar">
 </form>
+<hr>
 
 <br>
     <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal2">
@@ -62,6 +67,7 @@
     </button>
     
     <hr>
+
     <h2>Histórico de emprestimo</h2>
 
     <table class="table table-striped">
@@ -71,9 +77,27 @@
           <th scope="col">Data Emprestimo</th>
           <th scope="col">Data devolução</th>
           <th scope="col">Tempo de duração</th>
-          <th scope="col">Avaliação</th>
         </tr>
       </thead>
+      <tbody>
+        {% for i in emprestimos %}
+        <tr>
+          {% if i.nome_emprestado_anonimo == None%}
+
+            <th scope="row">{{i.nome_emprestado_usuario}}</th>
+            <td>{{i.data_emprestado}}</td>
+            <td>{{i.data_devolucao}}</td>
+
+          {% else %}
+
+            <th scope="row">{{i.nome_emprestado_anonimo}}</th>
+            <td>{{i.data_emprestado}}</td>
+            <td>{{i.data_devolucao}}</td>
+            <td>{{i.data_devolucao|mostra_duracao:i.data_emprestado}}</td> <!-- value1|mostra_devolucao:value2-->
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
       
     </table>
 

@@ -42,11 +42,11 @@ class Emprestimo(models.Model):
     
     nome_emprestado_usuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, blank = True, null = True, related_name='emprestimo_usuario') #registro de usuários cadastrados no sistema.
     nome_emprestado_anonimo = models.CharField(max_length = 30, blank = True, null = True) #para usuários não cadastrados no sistema
+    data_emprestado = models.DateTimeField(blank= True, null=True)
     data_devolucao = models.DateTimeField(blank= True, null=True)
     tempo_duracao = models.DateField(blank= True, null=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     livro = models.ForeignKey(Livros, on_delete=models.DO_NOTHING)
     avaliacao = models.CharField(max_length=1, choices=choices, null=True, blank=True)
     
     def __str__(self) -> str:
-        return f"{self.nome_emprestado} | {self.livro}"
+        return f"{self.nome_emprestado_usuario} | {self.livro}"
