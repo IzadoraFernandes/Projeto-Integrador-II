@@ -41,11 +41,12 @@ def ver_livros(request, id):
             categoria_livro = Categoria.objects.filter(usuario = request.session.get('usuario')) # para só exibir as categorias que o proprio usuário criou e não de todos.
             print(categoria_livro)
             
-            Emprestimo = Emprestimo.objects.filter(livro = livro)
+            Emprestimos = Emprestimo.objects.filter(livro = livro)
             print(Emprestimo)
+            print(" Emprestimos de um livro",Emprestimos)
             return render(request, 'ver_livro.html', {'livro': livro, 
                                                       'categoria_livro': categoria_livro, 
-                                                      'Emprestimo': Emprestimo,
+                                                      'Emprestimos': Emprestimos,
                                                       'usuario_logado': request.session.get('usuario')})
         else:
             return HttpResponse('Esse livro não é seu')
